@@ -128,17 +128,22 @@ export function ProjectsSection() {
       />
       <div className="project-grid">
         {projects.map((project, index) => (
-          <article className="portfolio-project-card" key={project.title}>
+          <article className="portfolio-project-card" id={`project-${index + 1}`} key={project.title}>
             <div aria-hidden="true" className={`project-visual project-visual-${index + 1}`}>
               <span className="project-visual-index">PROJECT / {String(index + 1).padStart(2, '0')}</span>
-              {index === 0 ? <ProjectNetwork /> : index === 1 ? <ProjectVision /> : <ProjectMessages />}
+              {index === 0 ? <ProjectMessages />: index === 1 ? <ProjectNetwork /> :<ProjectVision />  }
             </div>
             <div className="project-card-copy">
               <div className="project-meta">
                 <span className="eyebrow">{project.category}</span>
                 <span className="project-period">{project.period}</span>
               </div>
-              <h3>{project.title}</h3>
+              <h3>{project.title}   {project.url && (
+                <a className="project-demo-link" href={project.url} rel="noreferrer" target="_blank">
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
+              )}</h3>
+               
               <p>{project.description}</p>
               <ul className="project-highlights">
                 {project.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
@@ -146,13 +151,14 @@ export function ProjectsSection() {
               <div className="tag-list" aria-label="Project technologies">
                 {project.technologies.map((technology) => <Tag key={technology}>{technology}</Tag>)}
               </div>
+             
             </div>
           </article>
         ))}
       </div>
-      <a className="section-link" href={githubUrl} rel="noreferrer" target="_blank">
+      {/* <a className="section-link" href={githubUrl} rel="noreferrer" target="_blank">
         Browse public repositories <ArrowUpRight aria-hidden="true" />
-      </a>
+      </a> */}
     </section>
   )
 }
@@ -246,10 +252,12 @@ export function EducationSection() {
       <div className="education-grid">
         {education.map((item, index) => (
           <article className={`education-card${index === 0 ? ' education-card-primary' : ''}`} key={item.qualification}>
-            <div className="education-icon">
-              {index === 0 ? <GraduationCap aria-hidden="true" /> : <Award aria-hidden="true" />}
+            <div className="education-card-top">
+              <div className="education-icon">
+                {index === 0 ? <GraduationCap aria-hidden="true" /> : <Award aria-hidden="true" />}
+              </div>
+              <span className="date-label">{item.date}</span>
             </div>
-            <span className="date-label">{item.date}</span>
             <h3>{item.qualification}</h3>
             <p>{item.institution}</p>
             <span className="education-result">{item.result}</span>

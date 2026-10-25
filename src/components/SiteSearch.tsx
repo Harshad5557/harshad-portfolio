@@ -1,16 +1,23 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react'
 import { ArrowRight, Search, X } from 'lucide-react'
-import { searchableContent } from '../data/portfolio'
+import { projects, searchableContent } from '../data/portfolio'
 import { skillCategories } from '../data/skills'
 
 type SearchEntry = {
   title: string
   section: string
   keywords: string
+  target?: string
 }
 
 const searchEntries: SearchEntry[] = [
   ...searchableContent,
+  ...projects.map((project, index) => ({
+    title: project.title,
+    section: 'projects',
+    target: `project-${index + 1}`,
+    keywords: `${project.category} ${project.description} ${project.technologies.join(' ')} ${project.highlights.join(' ')}`,
+  })),
   ...skillCategories.map((category) => ({
     title: category.name,
     section: 'skills',
@@ -114,7 +121,7 @@ export function SiteSearch({
         <ul className="search-results" aria-label="Search results">
           {results.map((result) => (
             <li key={`${result.section}-${result.title}`}>
-              <a href={`#${result.section}`} onClick={navigateToResult}>
+              <a href={`#${result.target ?? result.section}`} onClick={navigateToResult}>
                 <span>{result.title}</span>
                 <ArrowRight aria-hidden="true" />
               </a>

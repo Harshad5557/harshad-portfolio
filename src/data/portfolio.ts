@@ -2,6 +2,7 @@ export type PortfolioProject = {
   title: string
   category: string
   period: string
+  url?: string
   description: string
   technologies: string[]
   highlights: string[]
@@ -44,9 +45,24 @@ export const experiences = [
 
 export const projects: PortfolioProject[] = [
   {
+    title: 'QuickChat',
+    category: 'Full stack · Real-time systems',
+    period: 'Sep 2025 – Nov 2025',
+    url: 'https://chat-app-kappa-ruddy.vercel.app/login',
+    description:
+      'A personal real-time messaging project exploring private one-to-one chat, authenticated HTTP and WebSocket flows, and CI/CD.',
+    technologies: ['React', 'TypeScript', 'Node.js', 'Socket.IO', 'MongoDB'],
+    highlights: [
+      'Implemented JWT authentication across HTTP routes and WebSocket connections.',
+      'Built reusable React hooks for socket communication.',
+      'Load-tested 50+ concurrent socket connections in the reported test environment.',
+    ],
+  },
+  {
     title: 'Predictive Transaction Intelligence for BFSI',
     category: 'Machine learning · Backend engineering',
-    period: 'August 2025 – October 2025',
+    period: 'Aug 2025 – Oct 2025',
+    url: 'https://github.com/Harshad5557/LLM_model',
     description:
       'A team-built transaction intelligence system combining a scikit-learn classification pipeline, FastAPI endpoints, and MySQL-backed analytics.',
     technologies: ['Python', 'FastAPI', 'scikit-learn', 'SMOTE', 'MySQL'],
@@ -59,7 +75,8 @@ export const projects: PortfolioProject[] = [
   {
     title: 'MineSafe-AI',
     category: 'Computer vision · Web application',
-    period: '2025 – 2026',
+    period: 'Dec 2025 – Apr 2026',
+    // url: 'https://chat-app-kappa-ruddy.vercel.app/login',
     description:
       'A final-year team project combining a Django safety-monitoring portal with a computer-vision pipeline for PPE detection.',
     technologies: ['Python', 'Django', 'OpenCV', 'YOLOv8', 'ViT-Pose'],
@@ -69,19 +86,7 @@ export const projects: PortfolioProject[] = [
       'Reported detection accuracy was approximately 93% across 1,000+ test video frames.',
     ],
   },
-  {
-    title: 'QuickChat',
-    category: 'Full stack · Real-time systems',
-    period: '2024 – 2025',
-    description:
-      'A personal real-time messaging project exploring private one-to-one chat, authenticated HTTP and WebSocket flows, and CI/CD.',
-    technologies: ['React', 'TypeScript', 'Node.js', 'Socket.IO', 'MongoDB'],
-    highlights: [
-      'Implemented JWT authentication across HTTP routes and WebSocket connections.',
-      'Built reusable React hooks for socket communication.',
-      'Load-tested 50+ concurrent socket connections in the reported test environment.',
-    ],
-  },
+  
 ]
 
 export const research = {
@@ -183,7 +188,7 @@ export const searchableContent = [
   { title: 'About', section: 'about', keywords: 'engineer computer engineering approach principles' },
   { title: 'Technical Skills', section: 'skills', keywords: 'languages python javascript typescript sql backend frontend authentication databases caching devops ai machine learning' },
   { title: 'Experience', section: 'experience', keywords: 'Infosys Springboard ScaleFull intern internship backend developer' },
-  { title: 'Projects', section: 'projects', keywords: projects.map((project) => `${project.title} ${project.category} ${project.description} ${project.technologies.join(' ')}`).join(' ') },
+  { title: 'Projects', section: 'projects', keywords: 'selected work portfolio software systems full stack' },
   { title: 'Research', section: 'research', keywords: `${research.title} ${research.venue} ${research.summary}` },
   { title: 'Education', section: 'education', keywords: education.map((item) => `${item.qualification} ${item.institution}`).join(' ') },
   { title: 'Certifications', section: 'certifications', keywords: certifications.map((item) => `${item.title} ${item.issuer}`).join(' ') },
