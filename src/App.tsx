@@ -1,14 +1,5 @@
-import { useEffect, useState, type MouseEvent } from 'react'
-import {
-  ArrowUpRight,
-  Menu,
-  Mail,
-  MapPin,
-  Moon,
-  Search,
-  Sun,
-  X,
-} from 'lucide-react'
+import { memo, useEffect, useRef, useState, type MouseEvent } from 'react';
+import { ArrowUpRight, Menu, Mail, MapPin, Search, X } from 'lucide-react';
 import {
   AboutSection,
   CertificationsSection,
@@ -20,246 +11,197 @@ import {
   ProjectsSection,
   ResearchSection,
   SkillsSection,
-} from './components/ContentSections'
-import { FloatingActions, ScrollProgress } from './components/SiteControls'
-import { SiteSearch } from './components/SiteSearch'
+} from './components/ContentSections';
+import { FloatingActions, ScrollProgress } from './components/SiteControls';
+import { SiteSearch } from './components/SiteSearch';
+import { InkTransition } from './ink/inkTransition';
+import { iconShapePath, iconShapePoints } from './ink/iconShape';
 
-type Theme = 'dark' | 'light'
+type Theme = 'dark' | 'light';
 
-const githubUrl = 'https://github.com/Harshad5557'
-const emailAddress = 'harshaddike1232@gmail.com'
+const githubUrl = 'https://github.com/Harshad5557';
+const emailAddress = 'harshaddike1232@gmail.com';
 
 function getInitialTheme(): Theme {
-  const savedTheme = localStorage.getItem('portfolio-theme')
-  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
-  return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'
+  const initialTheme = document.documentElement.dataset.theme;
+  if (initialTheme === 'light' || initialTheme === 'dark') return initialTheme;
+  const savedTheme = localStorage.getItem('portfolio-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 function HeroIllustration() {
   return (
     <div aria-hidden="true" className="hero-art">
-      <div className="hero-art-label">
-        <span>APPLICATION ARCHITECTURE</span>
-      </div>
-      <svg
-        className="architecture-visual"
-        fill="none"
-        role="presentation"
-        viewBox="0 0 520 440"
-      >
-        <defs>
-          <pattern
-            height="24"
-            id="hero-grid"
-            patternUnits="userSpaceOnUse"
-            width="24"
-          >
-            <circle cx="1" cy="1" fill="currentColor" r="1" />
-          </pattern>
-          <linearGradient id="cube-top" x1="153" x2="350" y1="128" y2="224">
-            <stop stopColor="#55a5ff" stopOpacity=".27" />
-            <stop offset="1" stopColor="#b49aff" stopOpacity=".12" />
-          </linearGradient>
-          <linearGradient id="cube-left" x1="153" x2="252" y1="180" y2="329">
-            <stop stopColor="#1688ff" stopOpacity=".24" />
-            <stop offset="1" stopColor="#1688ff" stopOpacity=".04" />
-          </linearGradient>
-          <linearGradient id="cube-right" x1="252" x2="350" y1="184" y2="326">
-            <stop stopColor="#b49aff" stopOpacity=".19" />
-            <stop offset="1" stopColor="#55a5ff" stopOpacity=".07" />
-          </linearGradient>
-          <radialGradient id="hero-light">
-            <stop stopColor="#1688ff" stopOpacity=".22" />
-            <stop offset="1" stopColor="#1688ff" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-
-        <circle cx="260" cy="222" fill="url(#hero-light)" r="210" />
-        <circle
-          cx="260"
-          cy="222"
-          r="177"
-          stroke="currentColor"
-          strokeDasharray="2 9"
-          strokeOpacity=".17"
-        />
-        <circle
-          cx="260"
-          cy="222"
-          r="137"
-          stroke="currentColor"
-          strokeOpacity=".1"
-        />
-        <path
-          d="M55 222h82m246 0h82M260 38v63m0 247v54"
-          stroke="currentColor"
-          strokeOpacity=".2"
-        />
-        <path
-          d="m152 151 108-62 108 62v124l-108 62-108-62V151Z"
-          fill="url(#hero-grid)"
-          fillOpacity=".7"
-          stroke="currentColor"
-          strokeOpacity=".12"
-        />
-
-        <path
-          d="m260 112 98 56-98 56-98-56 98-56Z"
-          fill="url(#cube-top)"
-          stroke="#74b8ff"
-          strokeOpacity=".76"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M162 168v112l98 56V224l-98-56Z"
-          fill="url(#cube-left)"
-          stroke="#55a5ff"
-          strokeOpacity=".56"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M358 168v112l-98 56V224l98-56Z"
-          fill="url(#cube-right)"
-          stroke="#9a83e9"
-          strokeOpacity=".52"
-          strokeWidth="1.5"
-        />
-
-        <path
-          d="m197 188 63 36 63-36m-126 34 63 36 63-36m-126 35 63 36 63-36"
-          stroke="#8ac5ff"
-          strokeOpacity=".34"
-        />
-        <path
-          d="M260 224v112m-49-140v112m98-112v112"
-          stroke="#8ac5ff"
-          strokeOpacity=".23"
-        />
-        <path
-          d="M162 168h-45v-36H76m282 36h46v-44h35M162 280h-54v39H79m279-39h49v39h35"
-          stroke="#72b4ff"
-          strokeOpacity=".46"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M260 112V78h57m-57 222v47h-56"
-          stroke="#9e8aff"
-          strokeOpacity=".56"
-          strokeWidth="1.5"
-        />
-
-        <circle cx="76" cy="132" fill="#55a5ff" r="4" />
-        <circle cx="437" cy="124" fill="#b49aff" r="4" />
-        <circle cx="79" cy="319" fill="#b49aff" r="4" />
-        <circle cx="463" cy="319" fill="#55a5ff" r="4" />
-        <circle cx="317" cy="78" fill="#55a5ff" r="3.5" />
-        <circle cx="204" cy="347" fill="#b49aff" r="3.5" />
-        <circle cx="260" cy="224" fill="#a5d1ff" r="4" />
-        <circle cx="260" cy="224" r="10" stroke="#55a5ff" strokeOpacity=".38" />
-      </svg>
-      <div className="hero-art-caption">
-        <span>Built to scale</span>
-        <span className="hero-art-caption-line" />
-        <span>WEB · DATA · INTELLIGENCE</span>
-      </div>
+      <img className="hero-portrait" src="/harshad-portrait.png" alt="" />
     </div>
-  )
+  );
 }
 
+const ThemeToggleIcon = memo(function ThemeToggleIcon({ initialTheme }: { initialTheme: Theme }) {
+  const isDark = initialTheme === 'dark';
+  const rays = [
+    [12, 1.5, 12, 4],
+    [12, 20, 12, 22.5],
+    [1.5, 12, 4, 12],
+    [20, 12, 22.5, 12],
+    [4.58, 4.58, 6.35, 6.35],
+    [17.65, 17.65, 19.42, 19.42],
+    [17.65, 6.35, 19.42, 4.58],
+    [4.58, 19.42, 6.35, 17.65],
+  ];
+
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      style={{ transform: isDark ? 'rotate(-25deg)' : undefined }}
+      viewBox="0 0 24 24"
+    >
+      <g
+        className="theme-toggle__rays"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.7"
+      >
+        {rays.map(([x1, y1, x2, y2], index) => (
+          <line key={index} opacity={isDark ? 0 : 1} x1={x1} x2={x2} y1={y1} y2={y2} />
+        ))}
+      </g>
+      <path
+        className="theme-toggle__body"
+        d={iconShapePath(iconShapePoints(initialTheme))}
+        fill="currentColor"
+      />
+    </svg>
+  );
+});
+
 export default function App() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const inkTransition = useRef<InkTransition | null>(null);
+  const initialTheme = useRef(theme).current;
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('portfolio-theme', theme)
-  }, [theme])
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>('.portfolio-header');
+    if (!header) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.className = 'ink-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.setAttribute('data-html2canvas-ignore', '');
+    header.append(canvas);
+
+    const transition = new InkTransition(
+      canvas,
+      header.querySelector<HTMLButtonElement>('.theme-toggle'),
+    );
+    inkTransition.current = transition;
+
+    return () => {
+      transition.destroy();
+      canvas.remove();
+      inkTransition.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     if (menuOpen) {
-      document.getElementById('portfolio-navigation')
+      document
+        .getElementById('portfolio-navigation')
         ?.querySelector<HTMLAnchorElement>('a')
-        ?.focus()
+        ?.focus();
     }
-  }, [menuOpen])
+  }, [menuOpen]);
 
   useEffect(() => {
-    const sections = [...document.querySelectorAll<HTMLElement>('#main-content > section')]
-    const directions = ['top', 'bottom', 'pop'] as const
-    const revealTargets = sections.flatMap((section) => {
-      if (section.id === 'top') {
-        return [
-          section.querySelector<HTMLElement>('.hero-copy'),
-          section.querySelector<HTMLElement>('.hero-visual-wrap'),
-        ]
-      }
+    const sections = [...document.querySelectorAll<HTMLElement>('#main-content > section')];
+    const directions = ['top', 'bottom', 'pop'] as const;
+    const revealTargets = sections
+      .flatMap((section) => {
+        if (section.id === 'top') {
+          return [
+            section.querySelector<HTMLElement>('.hero-copy'),
+            section.querySelector<HTMLElement>('.hero-visual-wrap'),
+          ];
+        }
 
-      return [
-        section,
-        ...section.querySelectorAll<HTMLElement>(
-          '.principle-card, .skill-category, .experience-card, .portfolio-project-card, .research-card, .education-card, .certification-card, .contact-email-card, .contact-form, .faq-item',
-        ),
-      ]
-    }).filter((element): element is HTMLElement => element !== null)
+        return [
+          section,
+          ...section.querySelectorAll<HTMLElement>(
+            '.principle-card, .skill-category, .experience-card, .portfolio-project-card, .research-card, .education-card, .certification-card, .contact-email-card, .contact-form, .faq-item',
+          ),
+        ];
+      })
+      .filter((element): element is HTMLElement => element !== null);
 
     if (
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
       !('IntersectionObserver' in window)
     ) {
-      return
+      return;
     }
 
     revealTargets.forEach((element, index) => {
-      element.dataset.reveal = directions[Math.floor(Math.random() * directions.length)]
-      element.style.setProperty('--reveal-delay', `${(index % 4) * 70}ms`)
-    })
-    document.documentElement.classList.add('reveal-ready')
+      element.dataset.reveal = directions[Math.floor(Math.random() * directions.length)];
+      element.style.setProperty('--reveal-delay', `${(index % 4) * 70}ms`);
+    });
+    document.documentElement.classList.add('reveal-ready');
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return
-        entry.target.classList.add('is-visible')
-        observer.unobserve(entry.target)
-      })
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.01 },
+    );
 
-    revealTargets.forEach((element) => observer.observe(element))
+    revealTargets.forEach((element) => observer.observe(element));
     return () => {
-      observer.disconnect()
-      document.documentElement.classList.remove('reveal-ready')
-    }
-  }, [])
+      observer.disconnect();
+      document.documentElement.classList.remove('reveal-ready');
+    };
+  }, []);
 
   useEffect(() => {
     const openSearch = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault()
-        setSearchOpen(true)
+        event.preventDefault();
+        setSearchOpen(true);
       }
-    }
+    };
 
-    window.addEventListener('keydown', openSearch)
-    return () => window.removeEventListener('keydown', openSearch)
-  }, [])
+    window.addEventListener('keydown', openSearch);
+    return () => window.removeEventListener('keydown', openSearch);
+  }, []);
 
-  const isDark = theme === 'dark'
+  const isDark = theme === 'dark';
   const closeMenu = (event?: MouseEvent<HTMLAnchorElement>) => {
-    if (!menuOpen) return
-    setMenuOpen(false)
+    if (!menuOpen) return;
+    setMenuOpen(false);
 
     if (event) {
-      const targetId = event.currentTarget.hash.slice(1)
+      const targetId = event.currentTarget.hash.slice(1);
       requestAnimationFrame(() => {
-        const target = document.getElementById(targetId)
-        if (!target) return
-        target.setAttribute('tabindex', '-1')
-        target.focus({ preventScroll: true })
-      })
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      });
     } else {
-      document.querySelector<HTMLButtonElement>('.menu-trigger')?.focus()
+      document.querySelector<HTMLButtonElement>('.menu-trigger')?.focus();
     }
-  }
+  };
 
   return (
     <>
@@ -271,23 +213,37 @@ export default function App() {
       <header
         className="site-header portfolio-header"
         onKeyDown={(event) => {
-          if (event.key === 'Escape' && menuOpen) closeMenu()
+          if (event.key === 'Escape' && menuOpen) closeMenu();
         }}
       >
         <a aria-label="Harshad Dike, home" className="brand" href="#top" onClick={closeMenu}>
-          <span aria-hidden="true" className="brand-mark">HD</span>
-          <span className="brand-name">HARSHAD DIKE<span> / ENGINEER</span></span>
+          <span aria-hidden="true" className="brand-mark">
+            HD
+          </span>
+          <span className="brand-name">
+            HARSHAD DIKE<span> / ENGINEER</span>
+          </span>
         </a>
         <nav
           aria-label="Main navigation"
           className={`header-nav${menuOpen ? ' is-open' : ''}`}
           id="portfolio-navigation"
         >
-          <a href="#about" onClick={closeMenu}>About</a>
-          <a href="#skills" onClick={closeMenu}>Skills</a>
-          <a href="#projects" onClick={closeMenu}>Projects</a>
-          <a href="#experience" onClick={closeMenu}>Experience</a>
-          <a href="#contact" onClick={closeMenu}>Contact</a>
+          <a href="#about" onClick={closeMenu}>
+            About
+          </a>
+          <a href="#skills" onClick={closeMenu}>
+            Skills
+          </a>
+          <a href="#projects" onClick={closeMenu}>
+            Projects
+          </a>
+          <a href="#experience" onClick={closeMenu}>
+            Experience
+          </a>
+          <a href="#contact" onClick={closeMenu}>
+            Contact
+          </a>
         </nav>
         <div className="header-actions">
           <button
@@ -302,12 +258,23 @@ export default function App() {
           </button>
           <button
             aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
+            aria-pressed={isDark}
             className="icon-button theme-toggle"
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            data-ink-live
+            onClick={(event) => {
+              const nextTheme = isDark ? 'light' : 'dark';
+              const point = event.detail === 0 ? undefined : { x: event.clientX, y: event.clientY };
+              if (inkTransition.current) {
+                inkTransition.current.toggle(point, undefined, setTheme);
+              } else {
+                document.documentElement.dataset.theme = nextTheme;
+                setTheme(nextTheme);
+              }
+            }}
             title={`${isDark ? 'Light' : 'Dark'} theme`}
             type="button"
           >
-            {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+            <ThemeToggleIcon initialTheme={initialTheme} />
           </button>
           <button
             aria-controls="portfolio-navigation"
@@ -331,13 +298,11 @@ export default function App() {
               <span>Software Developer</span>
             </div>
             <h1 id="hero-title">
-              Software Developer building{' '}
-              <span>reliable, intelligent applications.</span>
+              Software Developer building <span>reliable, intelligent applications.</span>
             </h1>
             <p className="hero-description">
-              I build full-stack applications, backend services, real-time
-              experiences, and machine learning solutions using modern web
-              technologies.
+              I build full-stack applications, backend services, real-time experiences, and machine
+              learning solutions using modern web technologies.
             </p>
             <div className="hero-location">
               <MapPin aria-hidden="true" />
@@ -352,10 +317,7 @@ export default function App() {
               >
                 Explore My Work <ArrowUpRight aria-hidden="true" />
               </a>
-              <a
-                className="button button-secondary button-medium"
-                href={`mailto:${emailAddress}`}
-              >
+              <a className="button button-secondary button-medium" href={`mailto:${emailAddress}`}>
                 <Mail aria-hidden="true" /> Get in Touch
               </a>
             </div>
@@ -378,5 +340,5 @@ export default function App() {
       <PortfolioFooter />
       <FloatingActions />
     </>
-  )
+  );
 }

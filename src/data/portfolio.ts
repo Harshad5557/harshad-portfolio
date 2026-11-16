@@ -1,15 +1,15 @@
 export type PortfolioProject = {
-  title: string
-  category: string
-  period: string
-  url?: string
-  description: string
-  technologies: string[]
-  highlights: string[]
-}
+  title: string;
+  category: string;
+  period: string;
+  url?: string;
+  description: string;
+  technologies: string[];
+  highlights: string[];
+};
 
-export const portfolioEmail = 'harshaddike1232@gmail.com'
-export const portfolioUpdatedAt = '2026-10-25'
+export const portfolioEmail = 'harshaddike1232@gmail.com';
+export const portfolioUpdatedAt = '2026-10-25';
 
 export const experiences = [
   {
@@ -41,7 +41,7 @@ export const experiences = [
     ],
     technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'CSS3'],
   },
-]
+];
 
 export const projects: PortfolioProject[] = [
   {
@@ -56,6 +56,20 @@ export const projects: PortfolioProject[] = [
       'Implemented JWT authentication across HTTP routes and WebSocket connections.',
       'Built reusable React hooks for socket communication.',
       'Load-tested 50+ concurrent socket connections in the reported test environment.',
+    ],
+  },
+  {
+    title: 'PayPilot AI',
+    category: 'AI · Agentic commerce · FinTech',
+    period: 'Nov 2026',
+    url: 'https://paypilot-ai-eta.vercel.app/',
+    description:
+      'An AI-powered PayPal operations copilot that streamlines payment workflows through intelligent invoice prioritization, payment planning, and approval-based financial operations.',
+    technologies: ['Python', 'Gemini API', 'PayPal Sandbox', 'AI Agents', 'REST APIs'],
+    highlights: [
+      'Developed an AI-powered copilot for invoice analysis, prioritization, and payment recommendations.',
+      'Implemented approval gates, transaction limits, and validation to ensure controlled payment execution.',
+      'Built payment history and audit logging to improve transaction traceability and operational transparency.',
     ],
   },
   {
@@ -86,8 +100,7 @@ export const projects: PortfolioProject[] = [
       'Reported detection accuracy was approximately 93% across 1,000+ test video frames.',
     ],
   },
-  
-]
+];
 
 export const research = {
   title: 'MineSafe-AI: Worker Safety Monitoring System',
@@ -97,13 +110,12 @@ export const research = {
   summary:
     'Co-authored research on an AI-assisted worker safety monitoring system using computer vision and machine learning.',
   technologies: ['YOLOv8', 'ViT-Pose', 'Computer vision', 'Django', 'Python'],
-}
+};
 
 export const education = [
   {
     qualification: 'Bachelor of Engineering in Computer Engineering',
-    institution:
-      'Dr. Vithalrao Vikhe Patil College of Engineering, Ahilyanagar',
+    institution: 'Dr. Vithalrao Vikhe Patil College of Engineering, Ahilyanagar',
     date: 'July 2026',
     result: '7.82 / 10 CGPA',
   },
@@ -119,7 +131,7 @@ export const education = [
     date: 'March 2020',
     result: '91%',
   },
-]
+];
 
 export const certifications = [
   {
@@ -137,30 +149,27 @@ export const certifications = [
   { title: 'Getting Started with AI', issuer: 'Infosys Springboard' },
   { title: 'AI Primer', issuer: 'Infosys Springboard' },
   { title: 'Principles of Generative AI', issuer: 'Infosys Springboard' },
-]
+];
 
 export const aboutPrinciples = [
   {
     title: 'Clean architecture',
-    description:
-      'Maintainable applications with a clear separation of responsibilities.',
+    description: 'Maintainable applications with a clear separation of responsibilities.',
   },
   {
     title: 'API-first thinking',
-    description:
-      'Reliable interfaces between user-facing applications, services, and data.',
+    description: 'Reliable interfaces between user-facing applications, services, and data.',
   },
   {
     title: 'Performance matters',
-    description:
-      'Measure bottlenecks, improve processing efficiency, and validate results.',
+    description: 'Measure bottlenecks, improve processing efficiency, and validate results.',
   },
   {
     title: 'Continuous learning',
     description:
       'Strengthen fundamentals through projects, debugging, and technical problem-solving.',
   },
-]
+];
 
 export const faqItems = [
   {
@@ -182,16 +191,49 @@ export const faqItems = [
     answer:
       'Email is the most direct option. The contact section also lets you copy the address or prepare an email draft.',
   },
-]
+];
 
 export const searchableContent = [
-  { title: 'About', section: 'about', keywords: 'engineer computer engineering approach principles' },
-  { title: 'Technical Skills', section: 'skills', keywords: 'languages python javascript typescript sql backend frontend authentication databases caching devops ai machine learning' },
-  { title: 'Experience', section: 'experience', keywords: 'Infosys Springboard ScaleFull intern internship backend developer' },
-  { title: 'Projects', section: 'projects', keywords: 'selected work portfolio software systems full stack' },
-  { title: 'Research', section: 'research', keywords: `${research.title} ${research.venue} ${research.summary}` },
-  { title: 'Education', section: 'education', keywords: education.map((item) => `${item.qualification} ${item.institution}`).join(' ') },
-  { title: 'Certifications', section: 'certifications', keywords: certifications.map((item) => `${item.title} ${item.issuer}`).join(' ') },
+  {
+    title: 'About',
+    section: 'about',
+    keywords: 'engineer computer engineering approach principles',
+  },
+  {
+    title: 'Technical Skills',
+    section: 'skills',
+    keywords:
+      'languages python javascript typescript sql backend frontend authentication databases caching devops ai machine learning',
+  },
+  {
+    title: 'Experience',
+    section: 'experience',
+    keywords: 'Infosys Springboard ScaleFull intern internship backend developer',
+  },
+  {
+    title: 'Projects',
+    section: 'projects',
+    keywords: 'selected work portfolio software systems full stack',
+  },
+  {
+    title: 'Research',
+    section: 'research',
+    keywords: `${research.title} ${research.venue} ${research.summary}`,
+  },
+  {
+    title: 'Education',
+    section: 'education',
+    keywords: education.map((item) => `${item.qualification} ${item.institution}`).join(' '),
+  },
+  {
+    title: 'Certifications',
+    section: 'certifications',
+    keywords: certifications.map((item) => `${item.title} ${item.issuer}`).join(' '),
+  },
   { title: 'Contact', section: 'contact', keywords: 'email Pune LinkedIn GitHub LeetCode' },
-  { title: 'Frequently Asked Questions', section: 'faq', keywords: faqItems.map((item) => `${item.question} ${item.answer}`).join(' ') },
-]
+  {
+    title: 'Frequently Asked Questions',
+    section: 'faq',
+    keywords: faqItems.map((item) => `${item.question} ${item.answer}`).join(' '),
+  },
+];

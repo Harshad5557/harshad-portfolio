@@ -20,7 +20,7 @@ npm run build
 
 The visual system uses deep navy surfaces, electric blue for primary emphasis, restrained violet highlights, and subtle borders. Space Grotesk is used for headings, Inter for body copy, and JetBrains Mono for technical labels. Shared color, typography, spacing, radius, border, shadow, and transition tokens are in `src/index.css`.
 
-Dark mode is the default; the header control switches themes and saves the preference in local storage. Keyboard focus styles, reduced-motion preferences, print styling, and responsive navigation are supported.
+The header control saves the selected theme in local storage; when no preference has been saved, the site follows the system color scheme. The theme is selected before the page is painted to avoid a flash. Theme changes use a click-originating WebGL2 ink-bleed transition with a CSS fallback, and the sun/moon icon animates with GSAP. Reduced-motion preferences, keyboard focus styles, print styling, and responsive navigation are supported. The adapted ink renderer's MIT license is included in `src/ink/LICENSE`.
 
 The hero architecture illustration uses a subtle looping motion treatment, and page sections randomly reveal from above, below, or with a restrained pop as they enter the viewport. These effects are disabled when reduced motion is requested.
 
